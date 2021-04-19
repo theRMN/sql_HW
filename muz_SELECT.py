@@ -31,8 +31,15 @@ connection = engine.connect()
 # print(one_word)
 
 ga_count = connection.execute("""SELECT name, COUNT(artist_id) FROM genres g
-                        LEFT JOIN artist_genres_albums aga ON aga.genres_id = g.id_genres
-                        GROUP BY g.name;
-                        """).fetchall()
+                            LEFT JOIN artist_genres_albums aga ON aga.genres_id = g.id_genres
+                            GROUP BY g.name;
+                            """).fetchall()
 
 pprint(ga_count)
+
+ya_count = connection.execute("""SELECT COUNT(id_tracks) FROM tracks a
+                            LEFT JOIN albums al ON al.id_albums = a.id_albums
+                            WHERE year_of_issue BETWEEN 2019 AND 2020
+                            GROUP BY year_of_issue;
+                            """).fetchall()
+pprint(ya_count)
