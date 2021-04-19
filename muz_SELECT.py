@@ -65,7 +65,15 @@ ar_col = connection.execute("""SELECT DISTINCT c.name FROM collections c
                          LEFT JOIN albums al ON al.id_albums = t.id_albums
                          LEFT JOIN artist_genres_albums aga ON aga.albums_id = al.id_albums
                          LEFT JOIN artist ar ON ar.id_artist = aga.artist_id
-                         WHERE ar.name = 'Ozzy Osbourne'
+                         WHERE ar.name = 'Ozzy Osbourne';
                          """).fetchall()
-
 pprint(ar_col)
+
+g1_more = connection.execute("""SELECT a.name FROM albums a
+                          LEFT JOIN artist_genres_albums aga ON aga.albums_id = a.id_albums
+                          LEFT JOIN genres g ON g.id_genres = aga.genres_id
+                          LEFT JOIN artist ar ON ar.id_artist = aga.artist_id
+                          GROUP BY a.name
+                          HAVING COUNT(g.id_genres) > 1;
+                          """).fetchall()
+pprint(g1_more)
