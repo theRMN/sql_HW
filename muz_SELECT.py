@@ -43,3 +43,9 @@ ya_count = connection.execute("""SELECT COUNT(id_tracks) FROM tracks a
                             GROUP BY year_of_issue;
                             """).fetchall()
 pprint(ya_count)
+
+x = connection.execute("""SELECT al.name, AVG(duration) FROM tracks a
+                      LEFT JOIN albums al ON al.id_albums = a.id_albums
+                      GROUP BY al.name;
+                      """).fetchall()
+pprint(x)
