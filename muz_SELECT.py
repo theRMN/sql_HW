@@ -58,3 +58,14 @@ not2020 = connection.execute("""SELECT name FROM artist
                           WHERE year_of_issue = 2020);                      
                           """).fetchall()
 pprint(not2020)
+
+ar_col = connection.execute("""SELECT DISTINCT c.name FROM collections c
+                         LEFT JOIN collections_tracks ct ON ct.collections_id = c.id_collections
+                         LEFT JOIN tracks t ON t.id_tracks = ct.tracks_id
+                         LEFT JOIN albums al ON al.id_albums = t.id_albums
+                         LEFT JOIN artist_genres_albums aga ON aga.albums_id = al.id_albums
+                         LEFT JOIN artist ar ON ar.id_artist = aga.artist_id
+                         WHERE ar.name = 'Ozzy Osbourne'
+                         """).fetchall()
+
+pprint(ar_col)
