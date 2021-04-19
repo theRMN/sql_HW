@@ -11,7 +11,8 @@ artist_list = ['Course Of Nature', 'Ozzy Osbourne', 'Thirty Seconds To Mars', 'D
 genres_list = ['Metal', 'Rock', 'Alternative', 'Gothic Metal', 'Rap']
 
 albums_dict = {'Black Rain (Expanded Edition)': 2007, 'Endgame': 2011, 'Superkala': 2002, 'AMERICA': 2018,
-               'The Lost Children': 2011, 'Shallow Life': 2009, 'Highway to Hell': 1979, 'Meteora': 2003
+               'The Lost Children': 2011, 'Shallow Life': 2009, 'Highway to Hell': 1979, 'Meteora': 2003,
+               'Hybrid Theory (20th Anniversary Edition)': 2020
                }
 
 track_dict = {'Not Going Away': [4.32, 8],
@@ -38,7 +39,10 @@ track_dict = {'Not Going Away': [4.32, 8],
               "Dont Stay": [3.07, 15],
               'Somewhere I Belong': [3.33, 15],
               'Lying from You': [2.55, 15],
-              'Close My Eyes Forever': [3.35, 8]
+              'Close My Eyes Forever': [3.35, 8],
+              'Papercut': [3.05, 16],
+              'One Step Closer': [2.36, 16],
+              'A Place for My Head': [3.36, 16]
               }
 
 for i in artist_list:
@@ -91,6 +95,12 @@ connection.execute("""
                         VALUES (3, 2, 9);
                     INSERT INTO artist_genres_albums (artist_id, genres_id, albums_id)
                         VALUES (3, 3, 9);
+                    INSERT INTO artist_genres_albums (artist_id, genres_id, albums_id)
+                        VALUES (10, 1, 16);
+                    INSERT INTO artist_genres_albums (artist_id, genres_id, albums_id)
+                        VALUES (10, 5, 16);
+                    INSERT INTO artist_genres_albums (artist_id, genres_id, albums_id)
+                        VALUES (10, 3, 16);
                     """)
 
 connection.execute("""
