@@ -44,8 +44,17 @@ ya_count = connection.execute("""SELECT COUNT(id_tracks) FROM tracks a
                             """).fetchall()
 pprint(ya_count)
 
-x = connection.execute("""SELECT al.name, AVG(duration) FROM tracks a
-                      LEFT JOIN albums al ON al.id_albums = a.id_albums
-                      GROUP BY al.name;
-                      """).fetchall()
-pprint(x)
+al_avg = connection.execute("""SELECT al.name, AVG(duration) FROM tracks a
+                          LEFT JOIN albums al ON al.id_albums = a.id_albums
+                          GROUP BY al.name;
+                          """).fetchall()
+pprint(al_avg)
+
+not2020 = connection.execute("""SELECT name FROM artist
+                          WHERE name != (
+                          SELECT DISTINCT ar.name FROM albums a 
+                          LEFT JOIN artist_genres_albums aga ON aga.albums_id = a.id_albums
+                          LEFT JOIN artist ar ON ar.id_artist = artist_id
+                          WHERE year_of_issue = 2020);                      
+                          """).fetchall()
+pprint(not2020)
