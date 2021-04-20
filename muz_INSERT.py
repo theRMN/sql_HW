@@ -158,3 +158,10 @@ connection.execute("""
                     INSERT INTO collections_tracks (collections_id, tracks_id)
                         VALUES (8, 2);
                     """)
+
+connection.execute("""UPDATE tracks
+                    SET id_albums = 10
+                    WHERE id_tracks = 4;
+                    UPDATE tracks
+                    SET id_albums = 10
+                    WHERE id_tracks = 3;""")
