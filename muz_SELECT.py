@@ -77,3 +77,10 @@ g1_more = connection.execute("""SELECT a.name FROM albums a
                           HAVING COUNT(g.id_genres) > 1;
                           """).fetchall()
 pprint(g1_more)
+
+not_col = connection.execute("""SELECT name FROM tracks
+                          WHERE name NOT IN (
+                          SELECT DISTINCT t.name FROM tracks t
+                          RIGHT JOIN collections_tracks ct ON ct.tracks_id = t.id_tracks)
+                          """).fetchall()
+pprint(not_col)
