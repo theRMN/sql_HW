@@ -84,3 +84,18 @@ not_col = connection.execute("""SELECT name FROM tracks
                           RIGHT JOIN collections_tracks ct ON ct.tracks_id = t.id_tracks)
                           """).fetchall()
 pprint(not_col)
+
+ar_mind = connection.execute("""SELECT DISTINCT ar.name FROM artist ar 
+                           LEFT JOIN artist_genres_albums aga ON aga.artist_id = ar.id_artist
+                           LEFT JOIN albums al ON al.id_albums = aga.albums_id
+                           LEFT JOIN tracks t ON t.id_albums = al.id_albums
+                           WHERE t.duration = (
+                           SELECT t.duration FROM artist ar 
+                           LEFT JOIN artist_genres_albums aga ON aga.artist_id = ar.id_artist
+                           LEFT JOIN albums al ON al.id_albums = aga.albums_id
+                           LEFT JOIN tracks t ON t.id_albums = al.id_albums
+                           ORDER BY duration
+                           LIMIT 1);
+                           """).fetchall()
+pprint(ar_mind)
+
