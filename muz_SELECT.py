@@ -30,7 +30,7 @@ connection = engine.connect()
 #                             """).fetchall()
 # print(one_word)
 
-ga_count = connection.execute("""SELECT DISTINCT g.name, COUNT(artist_id) FROM genres g
+ga_count = connection.execute("""SELECT g.name, COUNT(DISTINCT artist_id) FROM genres g
                             LEFT JOIN artist_genres_albums aga ON aga.genres_id = g.id_genres
                             GROUP BY g.name
                             """).fetchall()
@@ -109,4 +109,3 @@ x = connection.execute("""SELECT al.name FROM albums al
                      LIMIT 1)
                      """).fetchall()
 pprint(x)
-
